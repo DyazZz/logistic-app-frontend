@@ -1,7 +1,7 @@
-# Прототип системы ведения заявок
+# Прототип системы ведения заявок. Фронтенд.
 Тестовое задание YetiCrab
 ## Технологический стек:
-Фронтенд
+[Фронтенд](https://github.com/DyazZz/logistic-app-frontend)
 - React/Typescript
 - Redux - управление UI-состоянием
 - React Query - управление Remote-состоянием
@@ -9,7 +9,7 @@
 - React Hook Form - обработка форм
 - TailwindCSS - стилизация
 
-Бэкенд
+[Бэкенд](https://github.com/DyazZz/logistic-app-backend)
 - NestJS
 
 
