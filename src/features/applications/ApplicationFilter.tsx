@@ -13,7 +13,7 @@ function ApplicationFilter() {
         defaultValue={[sortValue]}
         onUpdate={(value) => {
           dispatch(setSortValue(value[0])); //этот селект возвращает данные в виде массива
-          //т.к. значение только одно, достаем первый элемент
+          //в моем случае значение только одно, поэтому достаем первый элемент
         }}
       >
         <Select.Option value="id">-</Select.Option>

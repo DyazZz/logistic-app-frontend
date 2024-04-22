@@ -11,7 +11,7 @@ export async function loadApplicationsBySearchQueryAndFilter(
   //изначально приходят отфильтрованными по id и сортировать их заново не имеет смысла
 
   const res = await fetch(
-    `${API_URL}/applications?search=${searchQuery}&filter=${filter}`,
+    `${API_URL}/applications?search=${searchQuery}&sort=${filter}`,
     {
       method: "GET",
     }

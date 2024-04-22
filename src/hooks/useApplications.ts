@@ -9,10 +9,6 @@ import { Application } from "../CustomTypes";
 import { useAppSelector } from "../hooks";
 import { useToaster } from "@gravity-ui/uikit";
 
-// type Props = {
-//   setFormState?: React.Dispatch<React.SetStateAction<boolean>>;
-// };
-
 export default function useApplications(
   setFormStateFunc?: React.Dispatch<React.SetStateAction<boolean>>
 ) {
@@ -122,7 +118,6 @@ export default function useApplications(
   });
 
   return {
-    //getApplications,
     addApplication,
     updateApplication,
     deleteApplication,
