@@ -25,16 +25,16 @@ const queryClient = new QueryClient({
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme="light">
-        <Provider store={store}>
-          <ToasterProvider>
-            <App />
-            <ToasterComponent />
-          </ToasterProvider>
-        </Provider>
-      </ThemeProvider>
-    </QueryClientProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <ThemeProvider theme="light">
+      <Provider store={store}>
+        <ToasterProvider>
+          <App />
+          <ToasterComponent />
+        </ToasterProvider>
+      </Provider>
+    </ThemeProvider>
+  </QueryClientProvider>
+  // </React.StrictMode>
 );

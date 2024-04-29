@@ -1,8 +1,8 @@
 import { useAppDispatch } from "../../hooks";
-import { setSearchQuery } from "./searchSlice";
+import { setFilterColumnName, setSearchQuery } from "./searchSlice";
 import { useState } from "react";
 
-function SearchBar() {
+function SearchBar({ filter }: { filter: string }) {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState("");
 
@@ -11,6 +11,7 @@ function SearchBar() {
       className="flex gap-4"
       onSubmit={(e) => {
         e.preventDefault();
+        dispatch(setFilterColumnName(filter));
         dispatch(setSearchQuery(value));
       }}
     >

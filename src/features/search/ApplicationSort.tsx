@@ -1,9 +1,15 @@
 import { Select } from "@gravity-ui/uikit";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getSortValue, setSortValue } from "../search/searchSlice";
+import {
+  getSortType,
+  getSortValue,
+  setSortType,
+  setSortValue,
+} from "./searchSlice";
 
-function ApplicationFilter() {
+function ApplicationSort() {
   const sortValue = useAppSelector(getSortValue);
+  const sortType = useAppSelector(getSortType);
   const dispatch = useAppDispatch();
 
   return (
@@ -12,7 +18,8 @@ function ApplicationFilter() {
       <Select
         defaultValue={[sortValue]}
         onUpdate={(value) => {
-          dispatch(setSortValue(value[0])); //этот селект возвращает данные в виде массива
+          dispatch(setSortValue(value[0]));
+          //этот селект возвращает данные в виде массива
           //в моем случае значение только одно, поэтому достаем первый элемент
         }}
       >
@@ -23,8 +30,17 @@ function ApplicationFilter() {
         <Select.Option value="status">Статус</Select.Option>
         <Select.Option value="ATI">ATI-код</Select.Option>
       </Select>
+      <Select
+        defaultValue={[sortType]}
+        onUpdate={(value) => {
+          dispatch(setSortType(value[0]));
+        }}
+      >
+        <Select.Option value="asc">↑</Select.Option>
+        <Select.Option value="desc">↓</Select.Option>
+      </Select>
     </div>
   );
 }
 
-export default ApplicationFilter;
+export default ApplicationSort;

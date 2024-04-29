@@ -1,14 +1,20 @@
 import { DropdownMenu } from "@gravity-ui/uikit";
 import useApplications from "../hooks/useApplications";
 import { Application, ApplicationStatus } from "../CustomTypes";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { setEditingApplication } from "../features/applications/applicationSlice";
+import { getDevMode } from "../features/settings/settingsSlice";
 
 type DropdownProps = {
   application: Application;
-  editHandle: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function TableDropdown({ application, editHandle }: DropdownProps) {
+function TableDropdown({ application }: DropdownProps) {
   const { updateApplication, deleteApplication } = useApplications();
+  const dispatch = useAppDispatch();
+  const isEditing = useAppSelector(getDevMode);
+
+  if (!isEditing) return;
 
   return (
     <DropdownMenu
@@ -35,7 +41,7 @@ function TableDropdown({ application, editHandle }: DropdownProps) {
           ],
         },
         {
-          action: () => editHandle(true),
+          action: () => dispatch(setEditingApplication(application)),
           text: "Редактировать",
         },
         {

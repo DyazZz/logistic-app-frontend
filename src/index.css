@@ -5,3 +5,33 @@
 .navlink.active {
   background-color: rgb(243 244 246);
 }
+
+html {
+  max-width: 100dvw;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.application-table th {
+  text-align: center;
+}
+
+.application-table td {
+  white-space: normal !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b9c8d5;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #63a7ff;
+}

@@ -4,6 +4,7 @@ const API_URL = "http://localhost:3000";
 
 export async function loadApplicationsBySearchQueryAndFilter(
   searchQuery: string,
+  columnName: string,
   filter: string
 ): Promise<Application[]> {
   if (filter === "id") filter = "";
@@ -11,7 +12,7 @@ export async function loadApplicationsBySearchQueryAndFilter(
   //изначально приходят отфильтрованными по id и сортировать их заново не имеет смысла
 
   const res = await fetch(
-    `${API_URL}/applications?search=${searchQuery}&sort=${filter}`,
+    `${API_URL}/applications?search=${searchQuery}&column=${columnName}&sort=${filter}`,
     {
       method: "GET",
     }

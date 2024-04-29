@@ -6,30 +6,38 @@ import {
   updateApplicationById,
 } from "../services/apiApplications";
 import { Application } from "../CustomTypes";
-import { useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { useToaster } from "@gravity-ui/uikit";
+import {
+  setIsCreatingApplication,
+  setEditingApplication,
+} from "../features/applications/applicationSlice";
+import { getFilterColumnName } from "../features/search/searchSlice";
 
-export default function useApplications(
-  setFormStateFunc?: React.Dispatch<React.SetStateAction<boolean>>
-) {
+export default function useApplications() {
   const queryClinet = useQueryClient();
-
+  const dispatch = useAppDispatch();
   const searchQuery = useAppSelector((state) => state.search.searchQuery);
   const sortValue = useAppSelector((state) => state.search.sort);
+  const filterColumn = useAppSelector(getFilterColumnName);
 
   const { add, remove } = useToaster();
 
   const getApplicationsBySearchQuery = useQuery({
-    queryKey: ["applications/get", searchQuery, sortValue],
+    queryKey: ["applications/get", searchQuery, filterColumn, sortValue],
     queryFn: () =>
-      loadApplicationsBySearchQueryAndFilter(searchQuery, sortValue),
+      loadApplicationsBySearchQueryAndFilter(
+        searchQuery,
+        filterColumn,
+        sortValue
+      ),
   });
 
   const addApplication = useMutation({
     mutationFn: (data: Application) => createApplication(data),
     onSuccess: () => {
       queryClinet.invalidateQueries({ queryKey: ["applications/get"] });
-      setFormStateFunc?.(false);
+      dispatch(setIsCreatingApplication(false));
       remove("create/pending");
       add({
         name: "creation/success",
@@ -57,10 +65,13 @@ export default function useApplications(
   });
 
   const updateApplication = useMutation({
-    mutationFn: (data: Application) => updateApplicationById(data),
+    mutationFn: (data: Application) => {
+      console.log(data);
+      return updateApplicationById(data);
+    },
     onSuccess: () => {
       queryClinet.invalidateQueries({ queryKey: ["applications/get"] });
-      setFormStateFunc?.(false);
+      dispatch(setEditingApplication(null));
       remove("update/pending");
       add({
         name: "update/success",
